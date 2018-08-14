@@ -1,17 +1,37 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ChangeDetectionStrategy,
+  EventEmitter,
+  Output,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core'
 
 @Component({
   selector: 'cs-total-cost',
   templateUrl: './total-cost.component.html',
   styleUrls: ['./total-cost.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TotalCostComponent {
-  @Input() totalCost : number;
-  @Output() shownGross : EventEmitter<number> = new EventEmitter<number>();
-  private VAT : number = 1.23;
+export class TotalCostComponent implements OnChanges {
+  @Input()
+  totalCost: number
+  @Output()
+  shownGross: EventEmitter<number> = new EventEmitter<number>()
+  private VAT: number = 1.23
+  costThreshold: number = 10000
+  isCostTooLow: boolean = false
+  showGross(): void {
+    this.shownGross.emit(this.totalCost * this.VAT)
+  }
 
-  showGross() : void {
-    this.shownGross.emit(this.totalCost * this.VAT);
+  ngOnChanges(changes: SimpleChanges) {
+    // console.log(changes['totalCost'].currentValue, this.isCostTooLow)
+    this.isCostTooLow = changes['totalCost'].currentValue < this.costThreshold
+    console.log(changes['totalCost'].previousValue, this.isCostTooLow)
+    console.log(changes['totalCost'].currentValue, this.isCostTooLow)
+    console.log(changes['totalCost'].isFirstChange(), this.isCostTooLow)
   }
 }
