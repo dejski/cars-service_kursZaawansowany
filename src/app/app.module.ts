@@ -10,6 +10,7 @@ import { CarsModule } from './cars/cars.module'
 import { LoginRoutingModule } from './login/login-routing.module'
 import { LoginModule } from './login/login.module'
 import { AuthService } from './auth/auth.service'
+import { AuthGuard } from './auth/auth.guard'
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,7 @@ import { AuthService } from './auth/auth.service'
     LoginRoutingModule,
     LoginModule,
   ],
-  providers: [CarsService, AuthService],
+  providers: [CarsService, AuthService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

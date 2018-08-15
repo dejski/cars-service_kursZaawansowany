@@ -1,3 +1,4 @@
+import { AuthGuard } from './../auth/auth.guard'
 import { NgModule } from '@angular/core'
 import { RouterModule, Route } from '@angular/router'
 import { CarDetailsComponent } from './car-details/car-details.component'
@@ -8,6 +9,7 @@ const CARS_ROUTES: Route[] = [
     path: 'cars/:id',
     component: <any>CarDetailsComponent,
     resolve: { car: CarResolve },
+    canActivate: [AuthGuard],
   },
 ]
 
