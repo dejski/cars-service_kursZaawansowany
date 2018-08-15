@@ -1,9 +1,12 @@
+import { CarTableRowComponent } from './../car-table-row/car-table-row.component'
 import {
   Component,
   OnInit,
   AfterViewInit,
   ViewEncapsulation,
   ViewChild,
+  ViewChildren,
+  QueryList,
 } from '@angular/core'
 import { Car } from '../models/car'
 import { TotalCostComponent } from '../total-cost/total-cost.component'
@@ -18,9 +21,11 @@ import { CostSharedService } from '../cost-shared.service'
   styleUrls: ['./cars-list.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CarsListComponent implements OnInit {
+export class CarsListComponent implements OnInit, AfterViewInit {
   @ViewChild('totalCostRef')
   totalCostRef: TotalCostComponent
+  @ViewChildren(CarTableRowComponent)
+  carRows: QueryList<CarTableRowComponent>
   totalCost: number
   grossCost: number
   cars: Car[] = []
@@ -36,6 +41,14 @@ export class CarsListComponent implements OnInit {
   ngOnInit() {
     this.loadCars()
     this.carForm = this.buildCarForm()
+  }
+
+  ngAfterViewInit(): void {
+    this.carRows.changes.subscribe(() => {
+      if (this.carRows.first.car.clientSurname === 'Kowalski') {
+        console.log('UWAGA na KOWALSKIEGO!!!')
+      }
+    })
   }
 
   buildCarForm() {
