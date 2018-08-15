@@ -11,6 +11,7 @@ import { LoginRoutingModule } from './login/login-routing.module'
 import { LoginModule } from './login/login.module'
 import { AuthService } from './auth/auth.service'
 import { AuthGuard } from './auth/auth.guard'
+import { LayautService } from './shared-module/services/layaut.service'
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,7 @@ import { AuthGuard } from './auth/auth.guard'
     LoginRoutingModule,
     LoginModule,
   ],
-  providers: [CarsService, AuthService, AuthGuard],
+  providers: [CarsService, AuthService, AuthGuard, LayautService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
