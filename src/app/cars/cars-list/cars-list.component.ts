@@ -1,3 +1,4 @@
+import { CsValidators } from './../../shared-module/validators/cs-validators'
 import { CarTableRowComponent } from './../car-table-row/car-table-row.component'
 import {
   Component,
@@ -63,7 +64,7 @@ export class CarsListComponent implements OnInit, AfterViewInit {
       deliveryDate: '',
       deadline: '',
       color: '',
-      power: '',
+      power: ['', CsValidators.power],
       clientFirstName: '',
       clientSurname: '',
       cost: '',
