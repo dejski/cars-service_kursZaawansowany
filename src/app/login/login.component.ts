@@ -1,3 +1,5 @@
+import { Router } from '@angular/router'
+import { AuthService } from './../auth/auth.service'
 import { Component, OnInit } from '@angular/core'
 
 @Component({
@@ -6,11 +8,23 @@ import { Component, OnInit } from '@angular/core'
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   login = ''
   password = ''
 
-  constructor() {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit() {}
+  onSubmit() {
+    this.authService
+      .login(this.login, this.password)
+      .then(this.onSubmitSuccess.bind(this), this.onSubmitFailure)
+  }
+
+  private onSubmitSuccess() {
+    this.router.navigate(['/cars'])
+  }
+
+  private onSubmitFailure() {
+    console.log('Nie udało się zalogować')
+  }
 }

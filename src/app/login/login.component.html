@@ -5,8 +5,8 @@
     <form class="form-signin">
       <input [(ngModel)]="login" name="login" type="text" id="inputEmail" class="form-control" placeholder="Login">
       <input [(ngModel)]="password" name="password" type="password" id="inputPassword" class="form-control" placeholder="Password">
-      <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+      <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" (click)="onSubmit()">Sign in</button>
     </form>
   </div>
-  <pre>{{login }} {{password}}</pre>
+  <!-- <pre>{{login }} {{password}}</pre> -->
 </div>
