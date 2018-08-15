@@ -16,6 +16,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { CostSharedService } from '../cost-shared.service'
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'cs-cars-list',
   templateUrl: './cars-list.component.html',
   styleUrls: ['./cars-list.component.less'],
@@ -69,6 +70,22 @@ export class CarsListComponent implements OnInit, AfterViewInit {
       isFullyDamaged: '',
       year: '',
     })
+  }
+
+  togglePlateValidity() {
+    const damageControl = this.carForm.get('isFullyDamaged')
+    const plateControl = this.carForm.get('plate')
+    if (damageControl.value) {
+      plateControl.clearValidators()
+    } else {
+      plateControl.setValidators([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(7),
+      ])
+    }
+
+    plateControl.updateValueAndValidity()
   }
 
   loadCars(): void {
