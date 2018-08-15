@@ -76,8 +76,7 @@ export class CarsListComponent implements OnInit {
     this.router.navigate(['/cars', car.id])
   }
 
-  removeCar(car: Car, event) {
-    event.stopPropagation()
+  onRemovedCar(car: Car) {
     this.carsService.removeCar(car.id).subscribe(() => {
       this.loadCars()
     })
