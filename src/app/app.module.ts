@@ -7,6 +7,8 @@ import { AppComponent } from './app.component'
 import { CarsRoutingModule, CarsService } from './cars/index'
 import { AppRoutingModule } from './app-routing.module'
 import { CarsModule } from './cars/cars.module'
+import { LoginRoutingModule } from './login/login-routing.module'
+import { LoginModule } from './login/login.module'
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +20,8 @@ import { CarsModule } from './cars/cars.module'
     CoreModule,
     AppRoutingModule,
     CarsRoutingModule,
+    LoginRoutingModule,
+    LoginModule,
   ],
   providers: [CarsService],
   bootstrap: [AppComponent],
